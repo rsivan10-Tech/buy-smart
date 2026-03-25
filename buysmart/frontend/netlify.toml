@@ -1,0 +1,19 @@
+[build]
+  command = "npm ci && npm run build"
+  publish = ".next"
+
+[dev]
+  command = "npm run dev -- --port 3000"
+  port = 3000
+
+[build.environment]
+  NODE_ENV = "production"
+  NEXT_PUBLIC_BACKEND_URL = "http://127.0.0.1:8005"
+  
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/index"
+  status = 200
+
+[context.production.environment]
+  NEXT_PUBLIC_BACKEND_URL = "https://your-backend-host.example.com"  # set after backend deploy
